@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo">this is test</h1>
+    <p id="demo"></p>
+    <script>
+function masahatMostatil(tool,arz){
+    var ms=tool*arz;
+    return ms;
+
+}
+console.log(masahatMostatil(20,5));
+function mohitMostatil(tool,arz){
+    var mohit=(tool+arz)*2;
+    return mohit;
+}
+ console.log(mohitMostatil( 5,15));
+
+ function mohitDyere(p,r){
+    var mohit1=(p*3.14);
+ return mohit1;
+
+ }
+
+ console.log(mohitDyere(5,3.14));
+
+ function masahatDayere(r){
+    var pi=3.14;
+ var masahat2=pi*(r**2);
+ return masahat2;
+ }
+ 
+ document.getElementById('demo').style.color='white'
+ document.getElementById('demo').style.backgroundColor='green';
+
+
+ var sum=0;
+ var i;
+ for(i=1;i<=4;i++){
+    sum += Number(prompt(`please inter std ${i} Number`));
+ }
+ var avg=sum/4;
+
+ document.write(`average is ${avg}`);
+
+
+ 
+    </script>
+
+</body>
+</html>
