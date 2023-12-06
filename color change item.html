@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      id="demo"
+      onmouseenter="enterElement(this)"
+      onmouseleave="leaveElement(this)"
+    >
+      item
+    </div>
+    <script>
+      function enterElement(element) {
+        element.style.color = "red";
+      }
+      function leaveElement(element) {
+        element.style.color = "black";
+      }
+    </script>
+  </body>
+</html>
