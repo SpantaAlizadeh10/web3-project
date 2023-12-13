@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var age;
+      var gender;
+
+      age = parseInt(prompt("Enter your age:"));
+      gender = prompt("Enter your gender(male/female):");
+
+      if (age > 12) {
+        if (age < 20) {
+          if (gender == "male") {
+            console.log("you are a teenage boy");
+          } else {
+            console.log("you are a teenage girl");
+          }
+        } else {
+          console.log("you are already an adult");
+        }
+      } else {
+        console.log("you are still too young");
+      }
+    </script>
+  </body>
+</html>
