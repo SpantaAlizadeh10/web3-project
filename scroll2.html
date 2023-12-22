@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header {
+      background-color: tomato;
+      top: 0;
+      left: 0;
+      height: 50px;
+      position: fixed;
+      transition: 0.5s;
+      width: 100%;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <body>
+    <header id="header"></header>
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+  </body>
+
+  <script>
+    $(function () {
+      let lastposition = $(document).scrollTop();
+      $(document).scroll(function (event) {
+        let newposition = $(document).scrollTop();
+
+        let diff = lastposition - newposition;
+        lastposition = newposition;
+        if (diff > 0) {
+          $("#header").css("top", "0");
+        } else {
+          $("#header").css("top", "-50px");
+        }
+      });
+    });
+  </script>
+</html>
