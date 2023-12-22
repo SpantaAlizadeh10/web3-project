@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header {
+      background-color: tomato;
+      top: 0;
+      left: 0;
+      height: 50px;
+      position: fixed;
+      transition: 0.5s;
+      width: 100%;
+    }
+    .progress-bar {
+      height: 8px;
+      background: #04aa6d;
+      width: 0%;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #cfbbde;
+      position: fixed;
+    }
+
+    .content {
+      padding: 100px 0;
+      margin: 50px auto 0 auto;
+      width: 80%;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <body>
+    <header id="header"></header>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="myBar"></div>
+    </div>
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+    <br /><br /><br />
+  </body>
+
+  <script>
+    $(function () {
+      let lastposition = $(document).scrollTop();
+      $(document).scroll(function (event) {
+        let newposition = $(document).scrollTop();
+
+        let diff = lastposition - newposition;
+        lastposition = newposition;
+        if (diff > 0) {
+          $("#header").css("top", "0");
+        } else {
+          $("#header").css("top", "-50px");
+        }
+      });
+    });
+  </script>
+
+  <script>
+    window.onscroll = function () {
+      myFunction();
+    };
+
+    function myFunction() {
+      var winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      var height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("myBar").style.width = scrolled + "%";
+    }
+  </script>
+</html>
