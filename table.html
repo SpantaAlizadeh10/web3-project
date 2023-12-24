@@ -47,6 +47,10 @@
       $('#registerUser').click(function(){
         let fname=$('#fname').val()
         let lname=$('#lname').val()
+        $('#fname').val('');
+        $('#lname').val('');
+
+        
         $('#tbody').append(`
          <tr>
                 <th>${id}</th>
