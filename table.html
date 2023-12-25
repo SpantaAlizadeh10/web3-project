@@ -6,13 +6,19 @@
     <title>Document</title>
 
     <style>
-        table,td,th{
+        table,tr,th{
             border: 1px solid lightblue;
             border-collapse: collapse;
 
         }
         table{
            width: 100%;
+        }
+        thead{
+            background-color: aquamarine;
+        }
+        tbody{
+            background-color: blueviolet;
         }
     </style>
 </head>
@@ -43,14 +49,14 @@
     </table>
 
     <script>
-      let id=1;
+      let id=0;
       $('#registerUser').click(function(){
-        let fname=$('#fname').val()
-        let lname=$('#lname').val()
+        let fname=$('#fname').val();
+        let lname=$('#lname').val();
         $('#fname').val('');
         $('#lname').val('');
+        id++;
 
-        
         $('#tbody').append(`
          <tr>
                 <th>${id}</th>
@@ -58,12 +64,14 @@
                 <th>${lname}</th>
                 <th> <button calss="remove">delete</button></th>
             </tr>`);
-            id++;
+            
       })
       $('body').on('click','.remove',function(){
-        delete val();
-
+        $(this).parents('tr') .remove();
       });
+    
+
+    
     </script>
     
 </body>
