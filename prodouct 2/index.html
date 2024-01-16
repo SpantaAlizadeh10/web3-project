@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="script.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ul {
+        list-style: none;
+      }
+
+      #products {
+        background-color: blanchedalmond;
+        background: rgb(196, 181, 210);
+        margin-bottom: 50px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      button {
+        width: 50px;
+        height: 20px;
+        margin-top: 25px;
+        margin-left: 10px;
+      }
+
+      h1:hover {
+        color: green;
+        transition: 2s;
+      }
+
+      #sidenav {
+        color: bisque;
+      }
+      body {
+        max-width: 1920px;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        font-family: var(--font-family);
+        background: rgb(228, 215, 215);
+      }
+
+      #cartItem {
+        font-size: 15px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        color: rgb(10, 8, 8);
+      }
+
+      ul {
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+    </style>
+    <style>
+      span {
+        position: fixed;
+        width: 100px;
+        height: 100px;
+        background: transparent;
+        background-size: cover;
+        pointer-events: none;
+        background: #e91e63;
+        animation: animate 5s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Welcome to your shop</h1>
+      <br />
+      <h3>you can find evry things here!</h3>
+      <div>
+        <button onclick="showsidenav()">Cart</button>
+        <div
+          id="sidenav"
+          style="
+            position: fixed;
+            right: -200px;
+            width: 200px;
+            height: 100%;
+            top: 0;
+            background-color: rgb(151, 200, 154);
+            color: rgb(15, 17, 19);
+            transition: 1s;
+          "
+        >
+          <button onclick="hidesidenav()">close</button>
+          <ul id="cartItem"></ul>
+        </div>
+      </div>
+      <div id="products" style="display: flex; flex-wrap: wrap"></div>
+
+      <script>
+        let products = [
+          {
+            id: 1,
+            title: "this is product 1",
+            Image: "https://picsum.photos/id/655/600/400",
+            price: 99500,
+            description: "Car",
+            inventory: 81,
+          },
+
+          {
+            id: 2,
+            title: "this is product 1",
+            Image: "https://picsum.photos/id/755/600/400",
+            price: 7500,
+            description: "caffe",
+            inventory: 29,
+          },
+
+          {
+            id: 3,
+            title: "this is product 1",
+            Image: "https://picsum.photos/id/455/600/400",
+            price: 8500,
+            description: "Showes",
+            inventory: 11,
+          },
+        ];
+        products.forEach(function (item) {
+          document.getElementById("products").innerHTML += `
+<div class="product" style="width:33%; border:1px solid lighthray;">
+    <img src="${item.Image}"alt="" style="width:100%;">
+    <h2>${item.title}</h2>
+    <p>${item.description}</p>
+    <p>inventry:${item.price}</p>
+    <p>inventry : ${item.inventory}</p>
+  
+    <button onclick="addToCart(${item.id})" style="width:100%; background-color:tomato;color:white;border: none;padding:5px 10px;">+</button>
+    <input value="0" data-product-count="${item.id}">
+    <button onclick="removeFromCart(${item.id})" style="width:100%; background-color:tomato;color:white;border:none;padding:5px 10px;">-</button>
+    </div>`;
+        });
+
+        let cart = [];
+        if (localStorage.getItem("cart") != null) {
+          let txt = localStorage.getItem("cart");
+          cart = JSON.parse(txt);
+          fillcart();
+        }
+
+        function addToCart(id) {
+          let index = cart.findIndex(function (item) {
+            return item.product_id == id;
+          });
+
+          let p = getProductById(id);
+          if (index == -1) {
+            cart.push({
+              product_id: id,
+              product_title: p.title,
+              product_price: p.price,
+              count: 1,
+              total_price: p.price,
+            });
+            document.querySelector(`[data-product-count="${p.id}"]`).value = 1;
+          } else {
+            cart[index].count += 1;
+            cart[index].total_price =
+              cart[index].count * cart[index].product_price;
+            document.querySelector(`[data-product-count="${p.id}"]`).value =
+              cart[index].count;
+          }
+          console.log(cart);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          fillcart();
+        }
+        function removeFromCart(id) {
+          let p = getProductById(id);
+          let index = cart.findIndex(function (item) {
+            return item.product_id == id;
+          });
+          if (index == -1) {
+            alert("mojodi sefr ast.");
+          } else {
+            if (cart[index].count == 1) {
+              document.querySelector(
+                `[data-product-count="${p.id}"]`
+              ).value = 0;
+              cart.splice(index, 1);
+            } else {
+              cart[index].count -= 1;
+              cart[index].total_price =
+                cart[index].count * cart[index].product_price;
+              document.querySelector(`[data-product-count="${p.id}"]`).value =
+                cart[index].count;
+            }
+          }
+          localStorage.setItem("cart", JSON.stringify(cart));
+          fillcart();
+        }
+
+        function getProductById(id) {
+          let index = products.findIndex(function (item) {
+            return item.id == id;
+          });
+          return products[index];
+        }
+
+        function showsidenav() {
+          document.getElementById("sidenav").style.right = 0;
+        }
+
+        function hidesidenav() {
+          document.getElementById("sidenav").style.right = "-200px";
+        }
+
+        function fillcart() {
+          let totalprice = 0;
+          document.getElementById("cartItem").innerHTML = "";
+          cart.forEach(function (item) {
+            document.getElementById(
+              "cartItem"
+            ).innerHTML += `<li>${item.product_title} -${item.count} -${item.product_price}-${item.total_price}</li>`;
+            totalprice += item.total_price;
+            document.querySelector(
+              `[data-product-count="${item.product_id}"]`
+            ).value = item.count;
+          });
+          document.getElementById(
+            "cartItem"
+          ).innerHTML += `<li>total price: ${totalprice}</li>`;
+        }
+      </script>
+    </section>
+  </body>
+</html>
